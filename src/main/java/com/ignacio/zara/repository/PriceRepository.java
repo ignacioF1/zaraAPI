@@ -7,10 +7,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PriceRepository extends JpaRepository<Price,Integer> {
-
     List<Price> findByProductIdAndBrandId(Integer productId, Integer brandId);
 
     List<Price> findByProductId(Integer productId);
 
     List<Price> findByBrandId(Integer brandId);
+
 }

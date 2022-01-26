@@ -20,23 +20,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/prices")
 @RequiredArgsConstructor
 public class PriceController {
-
     private final PriceService priceService;
-
     //Test Example
     // localhost:8080/prices?brandId=1&productId=35455&date=2020-06-14-10.00.00
     @GetMapping
     @ResponseBody
     public ResponseEntity getPrice(@RequestParam Integer brandId, Integer productId, String date) {
-        Integer value = priceService.ObtainProduct(brandId, productId);
-        Optional<Price> price = priceService.ObtainPrice(brandId, productId, date);
+        Integer value = priceService.checkBrandProductExist(brandId, productId);
+        Optional<Price> price = priceService.obtainPrice(brandId, productId, date);
         String productIdVal, brandIdVal, priceListVal, startDateVal, endDateVal, priceVal;
         if (value == 1) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No such product");
         } else if (value == 2) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No such brand");
         } else if (value == 3) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No such product nor brand");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No such product or brand");
         }
         if (price != null) {
             Map<String, String> response = new LinkedHashMap<>();

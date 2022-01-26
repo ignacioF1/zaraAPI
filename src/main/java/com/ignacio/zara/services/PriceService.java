@@ -4,7 +4,8 @@ import com.ignacio.zara.models.Price;
 import java.util.Optional;
 
 public interface PriceService {
-    Optional<Price> ObtainPrice (Integer brandId,Integer productId,String date);
+    Optional<Price> obtainPrice(Integer brandId,Integer productId,String date);
 
-    Integer ObtainProduct(Integer brandId, Integer productId);
+    Integer checkBrandProductExist(Integer brandId, Integer productId);
+
 }
